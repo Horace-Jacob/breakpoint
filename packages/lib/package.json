@@ -1,0 +1,19 @@
+{
+  "name": "@breakpoint/lib",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts"
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.50.0",
+    "next": "^16.2.6",
+    "zod": "^4.0.0"
+  }
+}

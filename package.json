@@ -1,0 +1,15 @@
+{
+  "name": "breakpoint",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "bun run --cwd apps/web dev",
+    "build": "bun run --cwd apps/web build",
+    "lint": "bun run --cwd apps/web lint",
+    "typecheck": "tsc --build",
+    "db:types": "supabase gen types typescript --project-id $SUPABASE_PROJECT_ID --schema public > packages/lib/src/database.types.ts"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}
