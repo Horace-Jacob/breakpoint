@@ -69,9 +69,15 @@ function isLikelyPhoneMatch(fullText: string, match: string): boolean {
 function maskPhoneNumbers(text: string): { found: boolean; masked: string } {
   let found = false
   const masked = text.replace(PHONE_REGEX, (match) => {
-    if (isLikelyPhoneMatch(text, match)) {
+    const leadingWhitespace = (match.match(/^\s*/) ?? [""])[0]
+    const trailingWhitespace = (match.match(/\s*$/) ?? [""])[0]
+    const withoutOuterWhitespace = match.slice(leadingWhitespace.length, match.length - trailingWhitespace.length)
+    const core = withoutOuterWhitespace.replace(/[.,!?;:]+$/, "")
+    const trailingPunctuation = withoutOuterWhitespace.slice(core.length)
+
+    if (isLikelyPhoneMatch(text, core)) {
       found = true
-      return "[PHONE REDACTED]"
+      return `${leadingWhitespace}[PHONE REDACTED]${trailingPunctuation}${trailingWhitespace}`
     }
     return match
   })
