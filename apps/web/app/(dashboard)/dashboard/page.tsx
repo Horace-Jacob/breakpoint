@@ -69,7 +69,7 @@ export default async function DashboardPage() {
     <div className="p-6 max-w-6xl mx-auto">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-foreground tracking-tight">Dashboard</h1>
-        <p className="text-sm text-muted-foreground mt-1">Welcome back, {firstName}.</p>
+        {/* <p className="text-sm text-muted-foreground mt-1">Welcome back, {firstName}.</p> */}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
