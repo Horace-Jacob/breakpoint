@@ -116,7 +116,7 @@ export function CreateKeyModal({ open, onOpenChange, onCreated }: CreateKeyModal
               </label>
               <Input
                 id="key-name"
-                placeholder="e.g. n8n production"
+                placeholder="e.g. testing"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
               />

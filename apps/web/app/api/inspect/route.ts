@@ -35,6 +35,11 @@ type UsageRpcResult = {
   limit: number
 }
 
+type UserSettingsRow = {
+  monthly_inspection_limit: number
+  fail_behavior: "closed" | "open" | null
+}
+
 type SlackSettingsRow = {
   slack_alerts_enabled: boolean
   slack_webhook_url: string | null
@@ -149,11 +154,12 @@ export async function POST(request: Request) {
 
     const { data: userSettings } = (await supabase
       .from("user_settings" as never)
-      .select("monthly_inspection_limit")
+      .select("monthly_inspection_limit, fail_behavior")
       .eq("user_id", apiKey.user_id)
-      .maybeSingle()) as { data: { monthly_inspection_limit: number } | null; error: { message: string } | null }
+      .maybeSingle()) as { data: UserSettingsRow | null; error: { message: string } | null }
 
     const limit = userSettings?.monthly_inspection_limit ?? 100
+    const failBehavior = userSettings?.fail_behavior === "open" ? "open" : "closed"
 
     const { data: usageData, error: usageError } = (await supabase.rpc("increment_usage_and_check" as never, {
       p_user_id: apiKey.user_id,
@@ -198,6 +204,7 @@ export async function POST(request: Request) {
         current: usageData.current_count,
         limit: usageData.limit,
       },
+      fail_behavior: failBehavior,
       ...(inGracePeriod
         ? {
             key_status: "grace_period",
@@ -299,4 +306,3 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }
-

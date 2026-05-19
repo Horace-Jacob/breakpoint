@@ -197,12 +197,12 @@ export function ApiKeyList({ initialKeys }: ApiKeyListProps) {
                   </td>
                   <td className="px-4 py-4">
                     {keyState === "active" ? (
-                      <Badge className="border-green-200 bg-green-100 text-green-800 dark:border-green-800/40 dark:bg-green-900/30 dark:text-green-400">
+                      <Badge className="badge-success">
                         Active
                       </Badge>
                     ) : isGrace && key.grace_expires_at ? (
                       <div className="flex items-center gap-2">
-                        <Badge className="border-transparent bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400">
+                        <Badge className="badge-warning">
                           Revoking
                         </Badge>
                         <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">

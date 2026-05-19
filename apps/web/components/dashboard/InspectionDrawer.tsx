@@ -31,17 +31,17 @@ function progressClass(score: number) {
 }
 
 function verdictClass(verdict: InspectionEvent["verdict"]) {
-  if (verdict === "allow") return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
-  if (verdict === "mask" || verdict === "fix") return "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400"
-  if (verdict === "block") return "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400"
-  return "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
+  if (verdict === "allow") return "badge-success"
+  if (verdict === "mask" || verdict === "fix") return "badge-warning"
+  if (verdict === "block") return "badge-danger"
+  return "badge-primary"
 }
 
 function riskClass(risk: InspectionEvent["risk_level"]) {
-  if (risk === "low") return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
-  if (risk === "medium") return "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400"
-  if (risk === "high") return "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400"
-  return "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400"
+  if (risk === "low") return "badge-success"
+  if (risk === "medium") return "badge-warning"
+  if (risk === "high") return "badge-warning"
+  return "badge-danger"
 }
 
 function violationBorder(type: PolicyViolation["type"]) {

@@ -89,6 +89,30 @@ body {
   transition: background-color 250ms ease, color 250ms ease;
 }
 
+.badge-success {
+  border-color: color-mix(in oklab, var(--success) 25%, transparent);
+  background: color-mix(in oklab, var(--success) 12%, transparent);
+  color: var(--success);
+}
+
+.badge-warning {
+  border-color: color-mix(in oklab, var(--warning) 25%, transparent);
+  background: color-mix(in oklab, var(--warning) 12%, transparent);
+  color: var(--warning);
+}
+
+.badge-danger {
+  border-color: color-mix(in oklab, var(--danger) 25%, transparent);
+  background: color-mix(in oklab, var(--danger) 12%, transparent);
+  color: var(--danger);
+}
+
+.badge-primary {
+  border-color: color-mix(in oklab, var(--primary) 25%, transparent);
+  background: color-mix(in oklab, var(--primary) 12%, transparent);
+  color: var(--primary);
+}
+
 code,
 pre,
 kbd,

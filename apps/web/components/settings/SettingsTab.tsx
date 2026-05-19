@@ -1,7 +1,7 @@
 ﻿"use client"
 
-import { AlertTriangle, Check, Copy, Info } from "lucide-react"
-import { useMemo, useState } from "react"
+import { AlertTriangle, Check, Copy } from "lucide-react"
+import { useState } from "react"
 
 import { Badge } from "../ui/badge"
 import { Button } from "../ui/button"
@@ -43,7 +43,8 @@ export function SettingsTab({ failBehavior, appUrl, onSave }: SettingsTabProps) 
   "usage": {
     "current": 45,               // Inspections used this month
     "limit": 100                // Your monthly limit
-  }
+  },
+  "fail_behavior": "open"       // open | closed  
 }`
 
   const savePreference = async () => {
@@ -73,25 +74,13 @@ export function SettingsTab({ failBehavior, appUrl, onSave }: SettingsTabProps) 
 
   const authSnippet = "Authorization: Bearer bp_live_your_api_key_here"
 
-  const n8nSteps = useMemo(
-    () => [
-      "Add an HTTP Request node after your AI agent node",
-      "Set Method to POST and URL to the endpoint above",
-      "Add header: Authorization -> Bearer your_api_key",
-      "Set Body to JSON and map your agent output to the payload field",
-      "Add a Switch node after -> connect routes for allow, mask, fix, block, ask",
-      "For mask/fix verdicts: use {{ $json.modified_payload }} for the next step",
-    ],
-    []
-  )
-
   return (
     <div className="space-y-6">
       <section className="rounded-xl border border-border bg-card p-6 space-y-4">
         <div className="space-y-1">
           <h2 className="text-lg font-semibold">Fail Behavior</h2>
           <p className="text-sm text-muted-foreground">
-            Controls what happens to your pipeline if Breakpoint is unreachable or returns an error.
+            Controls what your pipeline should do if Breakpoint is unreachable or times out.
           </p>
         </div>
 
@@ -105,7 +94,7 @@ export function SettingsTab({ failBehavior, appUrl, onSave }: SettingsTabProps) 
           >
             <p className="inline-flex items-center gap-2 font-medium">
               Fail Closed
-              <Badge className="border-green-200 bg-green-100 text-green-800 dark:border-green-800/40 dark:bg-green-900/30 dark:text-green-400">
+              <Badge className="badge-success">
                 Recommended
               </Badge>
             </p>
@@ -190,19 +179,6 @@ export function SettingsTab({ failBehavior, appUrl, onSave }: SettingsTabProps) 
           copied={copiedId === "response"}
           onCopy={() => void copyText("response", responseExample)}
         />
-
-        <div className="space-y-2">
-          <h3 className="font-medium">n8n Setup</h3>
-          <ol className="list-decimal space-y-1 pl-5 text-sm text-muted-foreground">
-            {n8nSteps.map((step) => (
-              <li key={step}>{step}</li>
-            ))}
-          </ol>
-          <p className="inline-flex items-start gap-2 text-sm text-muted-foreground">
-            <Info className="mt-0.5 size-4" />
-            The verdict field in the response tells you what happened. Your Switch node should branch on this value.
-          </p>
-        </div>
       </section>
     </div>
   )

@@ -166,7 +166,7 @@ export function NotificationsTab({
           </div>
           <h2 className="text-lg font-semibold">Slack Notifications</h2>
           {slackVerified ? (
-            <Badge className="border-green-200 bg-green-100 text-green-800 dark:border-green-800/40 dark:bg-green-900/30 dark:text-green-400">
+            <Badge className="badge-success">
               Verified
             </Badge>
           ) : null}
